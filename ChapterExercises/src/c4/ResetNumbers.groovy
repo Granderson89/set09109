@@ -24,6 +24,9 @@ class ResetNumbers implements CSProcess {
                             	  outChannel0: outChannel, 
                             	  outChannel1: b.out() ),
                      // requires a constructor for ResetSuccessor
+					 new ResetSuccessor ( inChannel: b.in(), 
+						 				  resetChannel: resetChannel,
+										  outChannel: c.out() )
                   ]
     new PAR ( testList ).run()    
   }
