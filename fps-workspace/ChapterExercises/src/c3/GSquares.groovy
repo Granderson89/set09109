@@ -21,6 +21,8 @@ class GSquares implements CSProcess {
                       // then run the network using TestGSCopy
                       //second modification replace the constructor for GSPairsA with GSPairsB
                       // then run the network again using TestGSCopy
+					  new GSPairsB ( inChannel: I2P.in(),
+						  outChannel: outChannel)
                       // you will then be able to compare the behaviour and also to
                       // explain why this happens!
                     ]
