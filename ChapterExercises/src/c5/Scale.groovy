@@ -5,8 +5,10 @@ import groovyJCSP.*
 import c05.ScaledData     
    
 class Scale implements CSProcess {
+	
   def int scaling
   def int multiplier = 2
+  
   def ChannelOutput outChannel
   def ChannelOutput factor
   def ChannelInput inChannel
@@ -42,10 +44,7 @@ class Scale implements CSProcess {
 		  suspend.read()
 		  factor.write(scaling)
 		  println "Suspended"
-		  preCon[SUSPEND] = false
 		  preCon[INJECT] = true
-		  preCon[TIMER] = false
-		  preCon[INPUT] = true
           break
         case INJECT:
           //  deal with inject input
@@ -54,10 +53,6 @@ class Scale implements CSProcess {
 		  suspended = false
 		  timeout = timer.read() + DOUBLE_INTERVAL
 		  timer.setAlarm(timeout)
-		  preCon[SUSPEND] = true
-		  preCon[INJECT] = false
-		  preCon[TIMER] = true
-		  preCon[INPUT] = true
           break
         case TIMER:
           //  deal with Timer input
@@ -65,7 +60,6 @@ class Scale implements CSProcess {
 		  timer.setAlarm(timeout)
 		  scaling = scaling * multiplier
 		  println "Normal Timer: new scaling is ${scaling}"
-
           break
         case INPUT:
           //   deal with Input channel
