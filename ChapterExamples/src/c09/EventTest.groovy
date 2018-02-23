@@ -13,11 +13,9 @@ class EventTest implements CSProcess {
 		while (true) {
 			def e = inChannel.read().copy()
 			if (e.data != 100 && e.data != e.prev + e.missed + 1) {
-				test = false
 				println "Incorrect 'missed'"
 			}
 			outChannel.write(e)
 		}
 	}
-
 }
