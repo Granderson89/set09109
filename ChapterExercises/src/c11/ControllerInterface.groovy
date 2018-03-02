@@ -1,4 +1,4 @@
-package c05
+package c11
 
 import groovyJCSP.*
 import jcsp.lang.*
@@ -18,6 +18,7 @@ class ControllerInterface implements CSProcess {
     def controllerCanvas = new ActiveCanvas()
     def scaleConfig = Channel.one2one()
     def suspendConfig = Channel.one2one()
+	def printConfig = Channel.one2one()
     def uiEvents = Channel.any2one( new OverWriteOldestBuffer(5) )
     def network = [ new ControllerManager ( fromScale: inChannel, 
                                           toScaleSuspend: suspend,

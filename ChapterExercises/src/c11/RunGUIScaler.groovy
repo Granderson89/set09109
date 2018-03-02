@@ -1,6 +1,7 @@
-package c05
+package c11
  
 import jcsp.lang.*
+import c05.Scale
 import groovyJCSP.*
 import groovyJCSP.plugAndPlay.*
 
@@ -28,10 +29,11 @@ def network = [ new GNumbers ( outChannel: data.out() ),
 										  suspend: pause.out(),
 										  inject: newScale.out(),
 										  initialScale: 2 ),
-							 
+					 
                 new GPrint ( inChannel: scaledData.in(),
                 		     heading: "Original      Scaled",
                 		     delay: 0)
+                		     
               ]
 
 new PAR ( network ).run()                                                            
