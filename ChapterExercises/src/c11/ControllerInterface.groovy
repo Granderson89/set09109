@@ -9,6 +9,7 @@ import jcsp.awt.*
 class ControllerInterface implements CSProcess {
 	
   def ChannelInput inChannel
+  def ChannelInput print
   def ChannelOutput suspend
   def ChannelOutput inject
   def int canvasSize = 100
@@ -18,7 +19,6 @@ class ControllerInterface implements CSProcess {
     def controllerCanvas = new ActiveCanvas()
     def scaleConfig = Channel.one2one()
     def suspendConfig = Channel.one2one()
-	def printConfig = Channel.one2one()
     def uiEvents = Channel.any2one( new OverWriteOldestBuffer(5) )
     def network = [ new ControllerManager ( fromScale: inChannel, 
                                           toScaleSuspend: suspend,
@@ -32,6 +32,7 @@ class ControllerInterface implements CSProcess {
                                           canvasSize: canvasSize,
                                           scaleValueConfig: scaleConfig.in(),
                                           suspendButtonConfig: suspendConfig.in(),
+										  printValueConfig: print,
                                           buttonEvent: uiEvents.out()  )
                   ]
     new PAR ( network ).run()
